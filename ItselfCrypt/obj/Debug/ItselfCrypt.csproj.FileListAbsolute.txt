@@ -1,0 +1,9 @@
+E:\Development\Hacking\Example-Source-Code\Crypters\ItselfCrypt\ItselfCrypt\bin\Debug\ItselfCrypt.exe.config
+E:\Development\Hacking\Example-Source-Code\Crypters\ItselfCrypt\ItselfCrypt\bin\Debug\ItselfCrypt.exe
+E:\Development\Hacking\Example-Source-Code\Crypters\ItselfCrypt\ItselfCrypt\bin\Debug\ItselfCrypt.pdb
+E:\Development\Hacking\Example-Source-Code\Crypters\ItselfCrypt\ItselfCrypt\obj\Debug\ItselfCrypt.csprojResolveAssemblyReference.cache
+E:\Development\Hacking\Example-Source-Code\Crypters\ItselfCrypt\ItselfCrypt\obj\Debug\ItselfCrypt.Form1.resources
+E:\Development\Hacking\Example-Source-Code\Crypters\ItselfCrypt\ItselfCrypt\obj\Debug\ItselfCrypt.Properties.Resources.resources
+E:\Development\Hacking\Example-Source-Code\Crypters\ItselfCrypt\ItselfCrypt\obj\Debug\ItselfCrypt.csproj.GenerateResource.Cache
+E:\Development\Hacking\Example-Source-Code\Crypters\ItselfCrypt\ItselfCrypt\obj\Debug\ItselfCrypt.exe
+E:\Development\Hacking\Example-Source-Code\Crypters\ItselfCrypt\ItselfCrypt\obj\Debug\ItselfCrypt.pdb

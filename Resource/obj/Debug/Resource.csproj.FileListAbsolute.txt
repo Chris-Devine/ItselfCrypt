@@ -1,0 +1,5 @@
+H:\Visual Studio Projects\Projects 15\ItselfCrypt\Resource\obj\Debug\Resource.csprojResolveAssemblyReference.cache
+H:\Visual Studio Projects\Projects 15\ItselfCrypt\Resource\bin\Debug\Resource.dll
+H:\Visual Studio Projects\Projects 15\ItselfCrypt\Resource\bin\Debug\Resource.pdb
+H:\Visual Studio Projects\Projects 15\ItselfCrypt\Resource\obj\Debug\Resource.dll
+H:\Visual Studio Projects\Projects 15\ItselfCrypt\Resource\obj\Debug\Resource.pdb
